@@ -1,0 +1,553 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { Upload, Type, Image as ImageIcon, Download, Layers, X, Move, RotateCw, ZoomIn, Trash2, Sliders } from 'lucide-react';
+
+export default function App() {
+  // State Utama
+  const [baseImage, setBaseImage] = useState(null);
+  const [layers, setLayers] = useState([]);
+  const [selectedLayerId, setSelectedLayerId] = useState(null);
+  const [canvasSize, setCanvasSize] = useState({ width: 800, height: 800 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+
+  // Refs
+  const canvasRef = useRef(null);
+  const fileInputRef = useRef(null);
+  const logoInputRef = useRef(null);
+
+  // --- Inisialisasi & Helper ---
+
+  // Fungsi untuk memuat gambar dari URL/File
+  const loadImage = (src) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = "Anonymous";
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = src;
+    });
+  };
+
+  // Handler Upload Produk Utama
+  const handleBaseImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        loadImage(event.target.result).then((img) => {
+          setBaseImage({
+            src: event.target.result,
+            imgObj: img,
+            width: img.width,
+            height: img.height
+          });
+          // Reset layers saat ganti produk baru
+          setLayers([]); 
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Handler Tambah Logo
+  const handleLogoUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        loadImage(event.target.result).then((img) => {
+          const newLayer = {
+            id: Date.now(),
+            type: 'image',
+            src: event.target.result,
+            imgObj: img,
+            x: canvasSize.width / 2,
+            y: canvasSize.height / 2,
+            scale: 0.3,
+            rotation: 0,
+            opacity: 1,
+            blendMode: 'normal'
+          };
+          setLayers([...layers, newLayer]);
+          setSelectedLayerId(newLayer.id);
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Handler Tambah Teks
+  const handleAddText = () => {
+    const newLayer = {
+      id: Date.now(),
+      type: 'text',
+      text: 'Teks Anda',
+      color: '#000000',
+      fontFamily: 'Arial',
+      fontSize: 40,
+      fontWeight: 'bold',
+      x: canvasSize.width / 2,
+      y: canvasSize.height / 2,
+      rotation: 0,
+      opacity: 1,
+      blendMode: 'normal'
+    };
+    setLayers([...layers, newLayer]);
+    setSelectedLayerId(newLayer.id);
+  };
+
+  // --- Rendering Canvas ---
+
+  const drawCanvas = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    // Bersihkan canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // 1. Gambar Produk Dasar (Background)
+    if (baseImage) {
+      // Logic agar gambar fit di canvas (contain)
+      const scale = Math.min(canvas.width / baseImage.width, canvas.height / baseImage.height);
+      const x = (canvas.width / 2) - (baseImage.width / 2) * scale;
+      const y = (canvas.height / 2) - (baseImage.height / 2) * scale;
+      
+      ctx.drawImage(baseImage.imgObj, x, y, baseImage.width * scale, baseImage.height * scale);
+    } else {
+      // Placeholder text jika belum ada gambar
+      ctx.fillStyle = '#f3f4f6';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#9ca3af';
+      ctx.font = '20px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Unggah Gambar Produk untuk Mulai', canvas.width / 2, canvas.height / 2);
+    }
+
+    // 2. Gambar Layers (Logo/Teks)
+    layers.forEach(layer => {
+      ctx.save();
+      
+      // Transformasi posisi
+      ctx.translate(layer.x, layer.y);
+      ctx.rotate((layer.rotation * Math.PI) / 180);
+      ctx.globalAlpha = layer.opacity;
+      ctx.globalCompositeOperation = layer.blendMode;
+
+      if (layer.type === 'image' && layer.imgObj) {
+        const w = layer.imgObj.width * layer.scale;
+        const h = layer.imgObj.height * layer.scale;
+        // Gambar centered di titik translate
+        ctx.drawImage(layer.imgObj, -w / 2, -h / 2, w, h);
+      } else if (layer.type === 'text') {
+        ctx.font = `${layer.fontWeight} ${layer.fontSize}px ${layer.fontFamily}`;
+        ctx.fillStyle = layer.color;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(layer.text, 0, 0);
+      }
+
+      ctx.restore();
+
+      // 3. Gambar Border Seleksi (Hanya visual UI, tidak ikut ter-render saat download nanti)
+      if (layer.id === selectedLayerId) {
+        ctx.save();
+        ctx.translate(layer.x, layer.y);
+        ctx.rotate((layer.rotation * Math.PI) / 180);
+        
+        let width = 0;
+        let height = 0;
+
+        if (layer.type === 'image') {
+          width = layer.imgObj.width * layer.scale;
+          height = layer.imgObj.height * layer.scale;
+        } else {
+          // Estimasi ukuran teks
+          ctx.font = `${layer.fontWeight} ${layer.fontSize}px ${layer.fontFamily}`;
+          const metrics = ctx.measureText(layer.text);
+          width = metrics.width;
+          height = layer.fontSize; // Kasar
+        }
+
+        ctx.strokeStyle = '#3b82f6';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([5, 5]);
+        // Padding sedikit untuk kotak seleksi
+        ctx.strokeRect((-width / 2) - 10, (-height / 2) - 10, width + 20, height + 20);
+        
+        // Titik tengah
+        ctx.fillStyle = '#3b82f6';
+        ctx.beginPath();
+        ctx.arc(0, 0, 5, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.restore();
+      }
+    });
+  };
+
+  useEffect(() => {
+    drawCanvas();
+  }, [baseImage, layers, selectedLayerId]);
+
+  // --- Interaksi Canvas (Mouse/Touch) ---
+
+  const getCanvasCoordinates = (e) => {
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    
+    // Support mouse and touch
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    return {
+      x: (clientX - rect.left) * scaleX,
+      y: (clientY - rect.top) * scaleY
+    };
+  };
+
+  const handleMouseDown = (e) => {
+    e.preventDefault();
+    const pos = getCanvasCoordinates(e);
+    
+    // Cek hit detection (sederhana: jarak ke pusat objek)
+    // Reverse loop agar yang paling atas terpilih duluan
+    const clickedLayer = [...layers].reverse().find(layer => {
+      // Hitungan kasar jarak radius untuk seleksi
+      // Untuk implementasi production, bounding box rotate lebih akurat tapi kompleks
+      const dist = Math.sqrt(Math.pow(pos.x - layer.x, 2) + Math.pow(pos.y - layer.y, 2));
+      return dist < 100; // Radius klik toleransi
+    });
+
+    if (clickedLayer) {
+      setSelectedLayerId(clickedLayer.id);
+      setIsDragging(true);
+      setDragOffset({
+        x: pos.x - clickedLayer.x,
+        y: pos.y - clickedLayer.y
+      });
+    } else {
+      setSelectedLayerId(null);
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging || !selectedLayerId) return;
+    e.preventDefault();
+    
+    const pos = getCanvasCoordinates(e);
+    
+    setLayers(layers.map(layer => {
+      if (layer.id === selectedLayerId) {
+        return {
+          ...layer,
+          x: pos.x - dragOffset.x,
+          y: pos.y - dragOffset.y
+        };
+      }
+      return layer;
+    }));
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // --- Update Properties Layer ---
+
+  const updateLayer = (key, value) => {
+    setLayers(layers.map(layer => 
+      layer.id === selectedLayerId ? { ...layer, [key]: value } : layer
+    ));
+  };
+
+  const deleteLayer = () => {
+    setLayers(layers.filter(l => l.id !== selectedLayerId));
+    setSelectedLayerId(null);
+  };
+
+  // --- Export ---
+  const handleDownload = () => {
+    const canvas = canvasRef.current;
+    // Hilangkan seleksi box sebelum download
+    const currentSelection = selectedLayerId;
+    setSelectedLayerId(null);
+    
+    // Perlu timeout kecil agar state update selection null tereksekusi sebelum capture
+    setTimeout(() => {
+        // Redraw manual tanpa seleksi box
+        requestAnimationFrame(() => {
+             const link = document.createElement('a');
+             link.download = 'mockup-hasil.png';
+             link.href = canvas.toDataURL('image/png', 1.0);
+             link.click();
+             setSelectedLayerId(currentSelection); // Kembalikan seleksi
+        });
+    }, 50);
+  };
+
+  const activeLayer = layers.find(l => l.id === selectedLayerId);
+
+  return (
+    <div className="min-h-screen bg-slate-100 flex flex-col font-sans text-slate-800">
+      
+      {/* Header */}
+      <header className="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center shadow-sm z-10">
+        <div className="flex items-center gap-2">
+          <Layers className="text-indigo-600 w-6 h-6" />
+          <h1 className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            Mockup Generator Pro
+          </h1>
+        </div>
+        <button 
+          onClick={handleDownload}
+          disabled={!baseImage}
+          className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg font-medium transition disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <Download size={18} />
+          Unduh Hasil
+        </button>
+      </header>
+
+      <div className="flex flex-1 flex-col lg:flex-row overflow-hidden h-[calc(100vh-64px)]">
+        
+        {/* Sidebar Controls */}
+        <aside className="w-full lg:w-80 bg-white border-r border-slate-200 flex flex-col overflow-y-auto z-20 shadow-sm">
+          
+          {/* Section 1: Upload Produk */}
+          <div className="p-5 border-b border-slate-100">
+            <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+              <ImageIcon size={16} /> 1. Produk Dasar
+            </h2>
+            <div 
+              onClick={() => fileInputRef.current.click()}
+              className="border-2 border-dashed border-slate-300 hover:border-indigo-400 hover:bg-indigo-50 rounded-xl p-6 flex flex-col items-center justify-center cursor-pointer transition group bg-slate-50"
+            >
+              <Upload className="text-slate-400 group-hover:text-indigo-500 mb-2" size={32} />
+              <span className="text-sm font-medium text-slate-600">Unggah Gambar Produk</span>
+              <span className="text-xs text-slate-400 mt-1">(JPG/PNG, Max 5MB)</span>
+            </div>
+            <input 
+              type="file" 
+              ref={fileInputRef} 
+              onChange={handleBaseImageUpload} 
+              accept="image/*" 
+              className="hidden" 
+            />
+          </div>
+
+          {/* Section 2: Tambah Overlay */}
+          <div className="p-5 border-b border-slate-100">
+             <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+              <Layers size={16} /> 2. Tambah Layer
+            </h2>
+            <div className="grid grid-cols-2 gap-3">
+              <button 
+                onClick={() => logoInputRef.current.click()}
+                disabled={!baseImage}
+                className="flex flex-col items-center justify-center p-3 bg-slate-50 border border-slate-200 rounded-lg hover:bg-slate-100 hover:border-indigo-300 transition disabled:opacity-50"
+              >
+                <ImageIcon className="mb-1 text-purple-500" size={24} />
+                <span className="text-xs font-semibold">Gambar/Logo</span>
+              </button>
+              <input 
+                type="file" 
+                ref={logoInputRef} 
+                onChange={handleLogoUpload} 
+                accept="image/*" 
+                className="hidden" 
+              />
+              
+              <button 
+                onClick={handleAddText}
+                disabled={!baseImage}
+                className="flex flex-col items-center justify-center p-3 bg-slate-50 border border-slate-200 rounded-lg hover:bg-slate-100 hover:border-indigo-300 transition disabled:opacity-50"
+              >
+                <Type className="mb-1 text-pink-500" size={24} />
+                <span className="text-xs font-semibold">Teks Baru</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Section 3: Properties Panel */}
+          <div className="flex-1 p-5 bg-slate-50 overflow-y-auto">
+             <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+              <Sliders size={16} /> 3. Edit Layer
+            </h2>
+            
+            {activeLayer ? (
+              <div className="space-y-5">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-xs font-bold text-slate-500 bg-slate-200 px-2 py-1 rounded">
+                    ID: {activeLayer.type.toUpperCase()}
+                  </span>
+                  <button 
+                    onClick={deleteLayer}
+                    className="text-red-500 hover:text-red-600 hover:bg-red-50 p-1.5 rounded-full transition"
+                    title="Hapus Layer"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+
+                {/* Konten Teks Editor */}
+                {activeLayer.type === 'text' && (
+                  <div className="space-y-3">
+                    <div>
+                      <label className="text-xs font-medium text-slate-500 mb-1 block">Isi Teks</label>
+                      <input 
+                        type="text" 
+                        value={activeLayer.text} 
+                        onChange={(e) => updateLayer('text', e.target.value)}
+                        className="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 text-sm"
+                      />
+                    </div>
+                    <div>
+                       <label className="text-xs font-medium text-slate-500 mb-1 block">Warna</label>
+                       <div className="flex gap-2">
+                          <input 
+                            type="color" 
+                            value={activeLayer.color}
+                            onChange={(e) => updateLayer('color', e.target.value)}
+                            className="h-9 w-9 p-0 border-0 rounded cursor-pointer"
+                          />
+                          <input 
+                            type="text" 
+                            value={activeLayer.color}
+                            onChange={(e) => updateLayer('color', e.target.value)}
+                            className="flex-1 px-3 py-2 border border-slate-300 rounded-md text-sm uppercase"
+                          />
+                       </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Transform Controls */}
+                <div className="space-y-4 pt-2 border-t border-slate-200">
+                  
+                  {/* Scale (Hanya untuk Image, Font Size untuk Text) */}
+                  {activeLayer.type === 'image' ? (
+                    <div>
+                      <div className="flex justify-between text-xs mb-1">
+                        <label className="font-medium text-slate-600 flex items-center gap-1"><ZoomIn size={12}/> Ukuran</label>
+                        <span className="text-slate-400">{Math.round(activeLayer.scale * 100)}%</span>
+                      </div>
+                      <input 
+                        type="range" 
+                        min="0.1" 
+                        max="2" 
+                        step="0.05"
+                        value={activeLayer.scale}
+                        onChange={(e) => updateLayer('scale', parseFloat(e.target.value))}
+                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="flex justify-between text-xs mb-1">
+                        <label className="font-medium text-slate-600 flex items-center gap-1"><ZoomIn size={12}/> Ukuran Font</label>
+                        <span className="text-slate-400">{activeLayer.fontSize}px</span>
+                      </div>
+                      <input 
+                        type="range" 
+                        min="12" 
+                        max="200" 
+                        value={activeLayer.fontSize}
+                        onChange={(e) => updateLayer('fontSize', parseInt(e.target.value))}
+                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                      />
+                    </div>
+                  )}
+
+                  {/* Rotasi */}
+                  <div>
+                    <div className="flex justify-between text-xs mb-1">
+                      <label className="font-medium text-slate-600 flex items-center gap-1"><RotateCw size={12}/> Putar</label>
+                      <span className="text-slate-400">{Math.round(activeLayer.rotation)}°</span>
+                    </div>
+                    <input 
+                      type="range" 
+                      min="0" 
+                      max="360" 
+                      value={activeLayer.rotation}
+                      onChange={(e) => updateLayer('rotation', parseInt(e.target.value))}
+                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                    />
+                  </div>
+
+                  {/* Opacity */}
+                  <div>
+                    <div className="flex justify-between text-xs mb-1">
+                       <label className="font-medium text-slate-600">Transparansi</label>
+                       <span className="text-slate-400">{Math.round(activeLayer.opacity * 100)}%</span>
+                    </div>
+                    <input 
+                      type="range" 
+                      min="0" 
+                      max="1" 
+                      step="0.05"
+                      value={activeLayer.opacity}
+                      onChange={(e) => updateLayer('opacity', parseFloat(e.target.value))}
+                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                    />
+                  </div>
+                  
+                  {/* Blending Mode */}
+                  <div>
+                    <label className="text-xs font-medium text-slate-500 mb-1 block">Blending Mode</label>
+                    <select 
+                      value={activeLayer.blendMode}
+                      onChange={(e) => updateLayer('blendMode', e.target.value)}
+                      className="w-full px-3 py-2 border border-slate-300 rounded-md bg-white text-sm"
+                    >
+                      <option value="normal">Normal</option>
+                      <option value="multiply">Multiply (Menyatu Gelap)</option>
+                      <option value="screen">Screen (Menyatu Terang)</option>
+                      <option value="overlay">Overlay</option>
+                      <option value="darken">Darken</option>
+                      <option value="lighten">Lighten</option>
+                    </select>
+                    <p className="text-[10px] text-slate-400 mt-1">
+                      Gunakan 'Multiply' untuk logo pada kaos putih agar tekstur terlihat.
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+            ) : (
+              <div className="h-full flex flex-col items-center justify-center text-slate-400 text-center p-4">
+                <Move size={32} className="mb-2 opacity-50" />
+                <p className="text-sm">Klik pada logo atau teks di area kerja untuk mengedit properti.</p>
+              </div>
+            )}
+          </div>
+        </aside>
+
+        {/* Canvas Area */}
+        <main className="flex-1 bg-slate-200 overflow-auto flex items-center justify-center p-8 relative">
+          <div className="relative shadow-xl bg-white">
+            <canvas
+              ref={canvasRef}
+              width={canvasSize.width}
+              height={canvasSize.height}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+              onTouchStart={handleMouseDown}
+              onTouchMove={handleMouseMove}
+              onTouchEnd={handleMouseUp}
+              className="max-w-full max-h-[80vh] object-contain cursor-crosshair touch-none"
+              style={{ width: '100%', height: 'auto', maxWidth: '600px' }} // Responsiveness
+            />
+          </div>
+          <div className="absolute bottom-4 right-4 text-slate-400 text-xs">
+             Drag untuk memindahkan • Scroll untuk melihat lebih banyak
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
