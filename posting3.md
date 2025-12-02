@@ -11,12 +11,17 @@ Kalau mau bikin orang save & share, fokus ke value praktis.
 
 ✅ Tweet 3 (Rahasia Utama)
 📌 Rahasia bikin konten yang disimpan:
+
 ✅ Checklist → Orang suka simpan hal yang bisa dipakai ulang
+
 ✅ Template → Format siap pakai bikin orang bookmark
+
 ✅ Step-by-step → Langkah jelas, bukan teori
+
 ✅ Visual ringkas → Bullet, emoji, atau gambar pendukung
 
 ✅ Tweet 4 (Contoh Nyata)
+
 Misal bahas “Cara bikin utas viral”:
 ✔ Beri formula (contoh: 4P: Promise, Pain, Process, Proof)
 ✔ Tambahkan contoh penerapan
@@ -60,3 +65,19 @@ Kalau kamu suka formula ini, simpan utas ini biar nggak lupa.
 Share ke teman yang lagi pusing bikin konten.
 👉 Mau saya spill template 4P siap pakai untuk niche kamu? Reply “YES”
 
+## Mulai jualan
+💬 Pelan… tapi pasti, cuan mulai mengalir dari Threads.
+
+Kadang kita cuma butuh satu langkah kecil untuk mulai dapat hasil besar.
+Dan kalau kamu sudah lama lihat orang lain panen cuan dari Threads,
+mungkin ini saatnya kamu ikut mulai — tanpa ribut, tanpa ribet.
+
+Di GetCuan by Alima, kamu akan belajar cara:
+✨ Bangun audiens di Threads dengan sederhana
+✨ Ubah postingan jadi peluang cuan
+✨ Dapet insight yang bisa langsung dipraktikkan, bukan teori belaka
+
+Semua disampaikan perlahan, runtut, dan mudah ditiru — cocok buat kamu yang mau mulai pelan, tapi mau hasil yang pasti.
+
+Yuk mulai perjalanan cuan dari Threads:
+👉 https://lynk.id/alima/page/getcuan
