@@ -113,3 +113,78 @@ Berikut **Tantangan 7 Hari Memperbaiki Makharijul Huruf** yang bisa langsung dip
 ---
 
 Kalau mau, saya bisa buatkan **versi carousel IG**, **reels script**, atau **template PDF** untuk tantangan ini.
+
+Berikut contoh **Jadwal Belajar Al-Qur’an untuk Ibu Rumah Tangga** dengan durasi **10–15 menit per hari** yang realistis dan fleksibel:
+
+***
+
+### ✅ **Prinsip Utama**
+
+*   **Konsisten**: Lebih baik sedikit tapi rutin.
+*   **Fokus**: Satu target kecil setiap hari.
+*   **Fleksibel**: Bisa dilakukan setelah shalat, sebelum tidur, atau saat anak istirahat.
+
+***
+
+## **Jadwal Mingguan (10–15 menit per hari)**
+
+### **Hari 1: Niat & Doa**
+
+*   2 menit: Niat ikhlas & doa agar dimudahkan.
+*   8–10 menit: Baca 1 halaman Al-Qur’an (tanpa terburu-buru).
+*   2–3 menit: Catat ayat yang menarik atau sulit.
+
+***
+
+### **Hari 2: Tajwid Dasar**
+
+*   5 menit: Pelajari 1 hukum tajwid (contoh: Mad Thabi’i).
+*   5–10 menit: Baca ulang halaman kemarin sambil praktik tajwid.
+
+***
+
+### **Hari 3: Hafalan Ringan**
+
+*   3 menit: Pilih 1–2 ayat pendek (misal dari Juz Amma).
+*   7–10 menit: Ulangi bacaan sampai lancar.
+
+***
+
+### **Hari 4: Makna Ayat**
+
+*   5 menit: Baca terjemahan ayat yang sudah dibaca.
+*   5–10 menit: Renungkan makna & kaitkan dengan kehidupan sehari-hari.
+
+***
+
+### **Hari 5: Muraja’ah (Review)**
+
+*   10–15 menit: Ulangi bacaan dari hari 1–4.
+
+***
+
+### **Hari 6: Hafalan Lanjutan**
+
+*   3 menit: Tambah 1 ayat baru.
+*   7–10 menit: Gabungkan dengan hafalan sebelumnya.
+
+***
+
+### **Hari 7: Evaluasi & Doa**
+
+*   5 menit: Evaluasi (apa yang sudah lancar, apa yang perlu diperbaiki).
+*   10 menit: Baca halaman baru atau ulang hafalan.
+
+***
+
+## **Tips Agar Konsisten**
+
+*   Pilih waktu tetap (misal setelah Subuh atau sebelum tidur).
+*   Gunakan **Al-Qur’an terjemahan** agar lebih memahami makna.
+*   Siapkan **alat bantu**: aplikasi Al-Qur’an, audio murottal, atau buku tajwid.
+*   Jika sibuk, **prioritaskan 1 aktivitas** (misal hanya baca 1 halaman).
+
+***
+
+📌 Mau saya buatkan **versi visual (infografis)** untuk jadwal ini agar mudah ditempel di dapur atau ruang keluarga?  
+Atau **format PDF printable** supaya bisa langsung dicetak?
