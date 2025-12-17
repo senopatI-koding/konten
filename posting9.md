@@ -90,3 +90,51 @@ Sekarang, saya bisa:
 
 **Hashtag untuk semua varian:**  
 \#GuruBK #CeritaGuru #AIuntukPendidikan #GoogleGemini #KurikulumMerdeka #ThreadsEdu
+
+Berikut contoh **copywriting dengan formula PAS (Problem – Agitate – Solution)** untuk posting di Threads:
+
+***
+
+### **Judul Post:**
+
+😰 *“Guru BK, Pernah Merasa Waktu Habis untuk Administrasi?”*
+
+***
+
+### **Problem (Masalah):**
+
+Setiap minggu, saya harus membuat RPL, laporan, dan surat menyurat.  
+Waktu saya habis di depan laptop, bukan di depan siswa.  
+Padahal saya jadi Guru BK untuk mendengar cerita mereka, bukan tenggelam di kertas.
+
+***
+
+### **Agitate (Perkuat Masalah):**
+
+Akibatnya?  
+✅ Siswa merasa kurang diperhatikan  
+✅ Saya kelelahan, ide kreatif untuk kelas pun hilang  
+✅ Administrasi menumpuk, bikin stres setiap akhir bulan
+
+***
+
+### **Solution (Solusi):**
+
+Sampai saya menemukan **Ebook ini**:  
+📘 *Transformasi Layanan BK dengan AI Google Gemini*  
+✅ Bikin RPL cuma 15 menit  
+✅ Dapat ide ice breaking & materi kreatif instan  
+✅ Simulasi konseling tanpa partner
+
+🔥 **Harga Promo:** Rp19.000  
+👉 Klik link ini dan rasakan bedanya: \[Link Marketplace]
+
+***
+
+**Hashtag:**  
+\#GuruBK #AIuntukPendidikan #GoogleGemini #KurikulumMerdeka #ThreadsEdu
+
+***
+
+
+
