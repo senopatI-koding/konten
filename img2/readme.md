@@ -98,3 +98,27 @@ Kenapa tidak cukup belajar di YouTube?
 📥 Klik link ini: https://lynk.id/alima/vyj3r2x3x3k2 dan mulai perjalanan seru bersama anak Anda: Dapatkan Sekarang!
 
 🔥 PROMO TERBATAS! Jangan lewatkan kesempatan ini untuk membekali anak dengan skill masa depan.
+
+# Posting Threads:
+
+## Judul (Hook):
+
+📱 Anak sering main gadget?
+Bayangkan kalau mereka bisa bikin game sendiri dalam 2 minggu! 🔥
+Isi (Soft Selling):
+Coding bukan cuma untuk programmer.
+Dengan panduan ini, orang tua NON-IT pun bisa mendampingi anak belajar coding dengan cara seru dan terstruktur.
+✔ Cocok untuk anak usia 6–12 tahun
+✔ Tanpa les mahal
+✔ Bisa dilakukan di rumah
+Apa yang akan Anda dapatkan?
+✅ Ebook Interaktif
+✅ Worksheet Printable
+✅ Inspirasi Proyek Coding
+🎁 Bonus: Grup Komunitas + Konsultasi Online
+💬 “Saya bukan programmer, tapi anak saya sekarang bisa bikin game sederhana!”
+CTA (Kuat tapi natural):
+👉 Siap ubah anak dari konsumen gadget jadi pencipta teknologi?
+Klik link ini dan mulai sekarang:
+[lynk.id/alima/vyj3r2x3x3k2]
+
