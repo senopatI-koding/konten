@@ -20,7 +20,7 @@ Ternyata kuncinya bukan 'melarang', tapi 'mengarahkan'.
 
 **Reply 1 (Isi Link):**
 Buat yang mau tau pake panduan apa yang ramah buat anak (dan aman buat ortu gaptek), saya pake metode di sini. Lagi ada diskon buat starter kit-nya:
-👉 [MASUKKAN LINK LANDING PAGE ANDA DI SINI]
+👉 https://lynk.id/alima/vyj3r2x3x3k2
 
 ---
 
