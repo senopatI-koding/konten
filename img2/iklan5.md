@@ -50,3 +50,22 @@ Klik link: **lynk.id/alima/vyj3r2x3x3k2**
 
 🔥 Mau saya buatkan **strategi hashtag untuk Threads** agar postingan ini lebih mudah viral?  
 Atau sekalian **visual pendukung (mockup eBook + ilustrasi coding)** untuk memperkuat engagement?
+
+# THREADS
+## Opsi A (Pendekatan Edukasi):
+
+"Banyak orang tua bangga anaknya pinter main Roblox. Padahal itu cuma jadi KONSUMEN.
+
+Di luar negeri, anak SD udah diajarin jadi KREATOR (bikin game sendiri). Skill coding itu melatih logika & problem solving, bukan cuma biar jadi programmer.
+
+Sayangnya kurikulum sekolah kita belum dukung. Makanya ortu harus inisiatif sendiri.
+
+Bingung mulainya? Gue udah siapin roadmap belajarnya buat yang gaptek sekalipun. Cek di sini 👉 [LINK]"
+
+## Opsi B (Pendekatan Emosional - FOMO):
+
+"Ngeri banget liat perkembangan AI sekarang. Pekerjaan administrasi bakal ilang semua.
+
+Bekal apa yang kita kasih ke anak biar mereka gak kegiles jaman 10 tahun lagi? Bahasa Inggris aja gak cukup. Bahasa Coding adalah literasi baru.
+
+Jangan sampe nyesel telat ngenalin ini ke anak. Mulai dari yang fun & gampang. Panduannya ada di sini: [LINK]"
