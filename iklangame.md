@@ -80,3 +80,131 @@ Semua lewat game buatan sendiri.
 📘 Ebook Scratch anak
 🎮 Project nyata
 🍩 Seru & mendidik
+
+Siap 👍
+Berikut **iklan copywriting versi Threads** yang **dikaitkan langsung dengan momen liburan sekolah**, gaya ngobrol, ringan, dan potensial viral. Tinggal copy–paste.
+
+---
+
+## 1️⃣ Versi “Liburan Kok Gini?”
+
+Liburan sekolah.
+Hari ke-3.
+
+Anak: main HP.
+Hari ke-5: masih main HP.
+Hari ke-10: **masih…** 😅
+
+Akhirnya aku kasih satu tantangan:
+👉 **“Coba bikin game sendiri.”**
+
+Hasilnya?
+Dia bangga.
+Aku tenang.
+
+📘 *Jago Bikin Game: Misi Hujan Donat*
+Belajar coding Scratch
+Tanpa install
+Usia 7–12 tahun
+
+Liburan tetap seru,
+otak tetap jalan.
+
+---
+
+## 2️⃣ Versi Storytelling Orang Tua
+
+Liburan sekolah itu panjang.
+Kalau tidak diarahkan,
+anak cuma pindah dari TV ke HP.
+
+Aku pilih opsi lain:
+liburan + belajar + senang.
+
+Anak bikin game.
+Bukan main game.
+
+🎮 Coding Scratch untuk anak
+📘 Ebook digital
+🍩 Project game seru
+
+Liburan yang meninggalkan karya,
+bukan cuma kenangan.
+
+---
+
+## 3️⃣ Versi Pendek & Ngena (Viral Style)
+
+Liburan sekolah ❌
+Liburan scroll HP ❌
+
+Liburan bikin game ✅
+
+📘 Ebook Scratch anak
+🎮 Game “Hujan Donat”
+👦👧 Usia 7–12 tahun
+
+Sekali beli,
+dipakai seharian.
+
+---
+
+## 4️⃣ Versi Edukatif + Lembut
+
+Liburan adalah waktu terbaik
+untuk anak mencoba hal baru.
+
+Belajar coding tidak harus berat.
+Bisa sambil main.
+Bisa sambil tertawa.
+
+📘 Jago Bikin Game: Misi Hujan Donat
+🎮 Scratch
+💻 Tanpa install
+
+Liburan boleh santai,
+tapi tetap bermakna.
+
+---
+
+## 5️⃣ Versi Challenge (Interaktif)
+
+Challenge liburan ini:
+❌ Jangan cuma main game
+✅ **Bikin game sendiri**
+
+Mulai dari yang sederhana.
+Satu game.
+Satu karya.
+
+📘 Ebook Scratch anak
+🎮 Misi Hujan Donat
+
+Coba dulu.
+Anaknya yang ketagihan 😄
+
+---
+
+## 6️⃣ Versi Islami (Lembut & Reflektif)
+
+Liburan adalah amanah.
+Waktu luang adalah kesempatan.
+
+Kalau anak senang bermain,
+arahkannya menjadi belajar dan berkarya.
+
+📘 Belajar coding Scratch
+🎮 Bikin game sendiri
+👦👧 Usia 7–12 tahun
+
+Liburan yang bernilai, insyaAllah.
+
+---
+
+Kalau mau, saya bisa:
+✅ buatkan **1 bulan konten Threads liburan**
+✅ versi **hard selling (diskon liburan)**
+✅ versi **pakai testimoni orang tua**
+✅ versi **CTA ke marketplace**
+
+Tinggal bilang lanjut yang mana 🚀
